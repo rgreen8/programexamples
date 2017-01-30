@@ -1,0 +1,76 @@
+Final Project, Moon Lander, Created by Connor and Ryan Green
+
+Final Report
+
+
+User Experience:
+  Start Screen:
+    The user, once running the program, is created with a start screen that tells them the basic ideas of the controls as well as lets them know
+that q will allow them to quit at any time. They are prompted to his 's' to start and the program is set up as to display this screen until the User
+inputs a command.
+  Playing the Game:
+    The ship is controlled by using either the WAD keys or the arrow keys.  You can rotate the ship using A or D, and when W is pressed, the rocket engine
+pushes you in the direction you are pointed. The object for the user is to land on 1 or 7 flat area of the "moon's" surface.  This is done by orientating the
+ship strait up and down and drifting down to a landing spot.  The user will notice that they must be in the right orientation of the ship will crash. If any part of
+the ship hits a non landing surface or the land goes poorly, the user will be penalized, given no boost to their score and sent back to their original ship position.
+The user is also prompted with incentives to landing in harder spots with smaller zones given boosts to their scores.  There are two 4X zones where landing is worth
+200 points, so a land anywhere is at least worth 50.  The overall goal of the game is to reach the highest score possible.
+  Crash Screen:
+    This screen pops up if the user crashes into the side of any of the mountains or tries to land at too high of a speed. The penalty of crashing is
+the loss of 200 of your 1000 fuel points as well as you get your position reset (no matter how hard the crash) to the same one as when the game started.
+The game is paused with the user being shown a random reason or fact about his landing, and an explanation of why the fuel was lost. The program then waits
+on the user to press c to continue as to not rush or surprise the player while they are reading the message.
+  Going out of Board:
+    If the user does not crash but still tries to leave the playable area, they are shown a message saying they are leaving the playable are and are returned
+to the generation spot of the ship.  They are told specifically that "They are leaving the safe landing zone", and the idea is if the ship does leave the board,
+its position is lost to the user, however it may not crash immediately causing the game to break.
+  Importance of Fuel:
+    Fuel in this version and in the real version is the true limiter of your score and landing abilities.  The user is given 1000 units of fuel to begin with, and
+this is used to punish the user if they crash (-200) or if they leave the bounds of the window (-10). Also when they run their engines, the fuel drops by 1 unit. When
+the user runs out of fuel, whether in a crash or by flying around the user is lead to a end screen.  The score is presented, they are told they can press q to quit.  Also,
+in the final screen, the rocket still exists but with no background so if the user does want to just fly the ship around when they are done they can. This is by no means
+necessary to the game, but we both thought it was fun.
+
+Program Implementation:
+  Class Creation:
+    The class ship was created to use as an internal interface with the the driver (final.cpp).  Its primary function
+    is to check and make adjustments based on used and graphic input.  This means that, while the adjustments
+    are made in the drive and the collisions/landing occur on the screen, the computation and background are
+    built into the class, this allowed us to make changes to speed during the review and testing and not have to
+    worry about editing the use of it in several functions.
+
+  Ship Creation:
+    The ship was an important part of the class construction as well as the over all user experience.
+    We wanted it to be more than a block that was simply shifted from point to point, this however
+    required two things: controlled from a point and rotation motion.  The point was needed so that
+    way changes in speed and location could easily applied.  Cosine and sine were used to allow rotation
+    of the ship and the flame that follows so that the user can achieve 360 degree control when attempting to land.
+    It can be thought of a triangle with the bottom pushed back to achieve a rectangle toped with a square.
+    The flame was used using the polygon fill.  This allowed us to create an illusion of propulsion and the fill
+    differentiating this from the ship.  This two had to rotated with respect to the flight orientation.
+
+  Background and Environment Creation:
+    The background was created using an array of start and end points, this allowed us to print
+    the board onto the screen in a line efficient manner. The writing and numeric adjustment feedback
+    all had to be printed and edited separately from the lines, this of course allows it to be independent.
+    The changing values had to edited as ints (truncates for readability) and then moved to strings, then finally
+    moved to chars to be displayed.
+
+  Landing Method:
+    The landing method checks both orientation, speed, and position.  We check to see that the base of the ship is pointed
+    towards the landing zone, the look to see that it is within the x bounds of zone and going slow enough.  If both of these
+    are valid it keeps track of the y value as it approaches the dock.  In order to make the game easier to play we give the
+    ship a tolerance of 20.  Once this is achieved the ship is "pulled into landing" and points are awarded.
+
+
+Output Verification:
+  Testing User Feedback:
+    To begin to understand how to game function we would use the ideas and features that we would want to implement in the game
+    and then test on a small scale.  Once we had the parts working, for instance the ship made, flame element, and the drawing of the board.
+    Once the basics were set up and we had crashes and landings we wanted to make sure that the game was play and beatable.  We tested the motion
+    and had to correct for theta on the velocity so you truly moved in the direction that was more intuitive given the keyboard inputs.
+  Crash Tests:
+    We began with the crash resultant of the top point of the ship, this was the check explosion angle and animation. We then moved on
+    to rest of the ship by checking the corners, this allowed us to check to see if a pass was made into the shape of the ship. This, left us
+    vulnerable to a ship lowering itself on the side over one the peaks and not tripping the corner check until a little later.  This,
+    however, given the fight mechanics would be a very rare occurrence and was worth the overall run time gain.
