@@ -1,2 +1,4 @@
 # programexamples
-A spotlight of my previous programing assignments and side projects
+This is used to store personal files for examples in the future 
+
+
