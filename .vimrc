@@ -1,6 +1,7 @@
 syntax enable
 colorscheme slate
 set number
+set relativenumber
 set ignorecase
 set mouse=a
 set title
